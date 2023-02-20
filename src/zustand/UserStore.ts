@@ -1,17 +1,17 @@
 import { create } from 'zustand'
-
 export interface User{
     id:string,
     name:string|null,
     avatar: string|null
 }
-
 interface UserState{
-    user: User,
-    SetUser: (user: User)=> void
+    user: User
 }
 
-export const useUserStore = create<UserState>((set) => ({
+export const useUserStore = create<UserState>(() => ({
     user: {id:'',name:'', avatar:''},
-    SetUser: (user:User)=> set(() => ({user: user}))
 }))
+
+export const SetUser = (user:User)=>{
+    useUserStore.setState({user:user})
+}

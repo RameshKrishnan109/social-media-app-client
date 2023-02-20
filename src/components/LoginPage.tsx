@@ -3,8 +3,8 @@ import { app } from "../utilities/firebaseInit";
 import { Button, Center, Heading } from '@chakra-ui/react';
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth';
 import { apiRequest } from '../utilities/ApiRequests';
-import { User, useUserStore } from '../zustand/UserStore';
-import { UsePageStore } from '../zustand/PageStore';
+import { SetUser, User } from '../zustand/UserStore';
+import { setCurrentPage } from '../zustand/GlobalStore';
 
 interface LoginResponse{
     id:string,
@@ -16,9 +16,6 @@ const LoginPage = () => {
 
     const provider = new GoogleAuthProvider();
     const auth = getAuth(app);
-
-    const {SetUser} = useUserStore();
-    const {setCurrentPage} = UsePageStore();
 
     const Login = (user: User)=>{
         apiRequest.post<LoginResponse>("/signIn", user).then((res) => {

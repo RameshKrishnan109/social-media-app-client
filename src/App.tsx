@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import LoginPage from './components/LoginPage'
 import MainPage from './components/MainPage'
-import { UsePageStore } from './zustand/PageStore';
+import { UseGlobalStore } from './zustand/GlobalStore';
 
 function App() {
 
-  const {currentPage} = UsePageStore();
+  const {currentPage} = UseGlobalStore();
 
   return (
     <div>

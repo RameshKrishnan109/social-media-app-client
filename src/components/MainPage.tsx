@@ -1,11 +1,11 @@
-import { Avatar, Box, Flex, Heading, Image, Spacer, Text } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Heading, Image, Spacer, Text } from '@chakra-ui/react';
 import React from 'react'
-import { UsePageStore } from '../zustand/PageStore';
-import { useUserStore } from '../zustand/UserStore'
+import { setCurrentPage } from '../zustand/GlobalStore';
+import { SetUser, useUserStore } from '../zustand/UserStore'
+import CreatePost from './CreatePost';
 
 const MainPage = () => {
-    const { user, SetUser } = useUserStore();
-    const {setCurrentPage} = UsePageStore();
+    const { user } = useUserStore();
 
     const SignOut = ()=>{
         SetUser({id:'',name:'', avatar:''});
@@ -18,6 +18,7 @@ const MainPage = () => {
                     <Heading fontSize='30px'>Social media app</Heading>
                     <Spacer></Spacer>
                     <Flex gap='10px' align='center'>
+                        <Button colorScheme='blue'>Add Post</Button>
                         <Avatar name='avatar' src={user.avatar as string} h='100%' w='47px' />
                         <Flex direction='column'>
                             <Text fontSize='20px'>{user.name}</Text>
@@ -27,6 +28,7 @@ const MainPage = () => {
                 </Flex>
             </Box>
             <Box bgColor='#c8d0de5d' w='100%' h='100vh'></Box>
+            <CreatePost />
         </>
     )
 }
